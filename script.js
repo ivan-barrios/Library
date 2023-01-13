@@ -1,9 +1,6 @@
 //DATA
 let myLibrary = [
-  {title: "titulo", author:"Yo", pages:123, isRead:true},
-  {title: "titulazo", author:"El", pages:2, isRead:false},
-  {title: "UFFF", author:"alla", pages:1233, isRead:true},
-  {title: "CACA", author:"nomolestes", pages:444, isRead:true}
+  {title: "titulo", author:"Yo", pages:123, isRead:true}
 ];
 
 function Book(title, author, pages, isRead) {
@@ -33,9 +30,20 @@ function getBookFromInput() {
 function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookFromInput();
+  if (newBook.title === '' || newBook.author === '' || newBook.pages === '') {
+    alert('Oops, you forgot a field!');
+    return
+  }
+  clearForm();
   myLibrary.push(newBook);
   updateDisplay();
-  console.log(myLibrary);
+}
+
+function clearForm() {
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('pages').value = '';
+  document.getElementById('isRead').checked = false;
 }
 
 function updateDisplay() {
@@ -54,13 +62,35 @@ function createBookCard(book){
   const author = document.createElement('p');
   const pages = document.createElement('p');
   const isRead = document.createElement('button');
+  const remove = document.createElement('button');
+
+  isRead.addEventListener('click', () => {
+    const index = myLibrary.indexOf(book);
+    if (myLibrary[index].isRead){
+      isRead.textContent = 'Not Read';
+      myLibrary[index].isRead = false;
+    }
+    else {
+      isRead.textContent = 'Read';
+      myLibrary[index].isRead = true;
+    }
+  })
+
+  //Removes from the books-display and from myLibrary
+  remove.addEventListener('click', () => {
+    container.innerHTML = '';
+    const index = myLibrary.indexOf(book);
+    myLibrary.splice(index, 1);
+  })
 
   container.classList.add('card-container');
   isRead.classList.add('read-btn');
+  remove.classList.add('remove-btn');
 
   title.textContent = `Title: ${book.title}`;
   author.textContent = `Author: ${book.author}`;
   pages.textContent = `Pages: ${book.pages}`;
+  remove.textContent = 'Remove Book';
   
   if (book.isRead) {
     isRead.textContent = 'Read';
@@ -73,6 +103,7 @@ function createBookCard(book){
   container.appendChild(author);
   container.appendChild(pages);
   container.appendChild(isRead);
+  container.appendChild(remove);
   booksDisplay.appendChild(container);
 }
 
