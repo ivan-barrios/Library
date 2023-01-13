@@ -1,5 +1,8 @@
 //DATA
 let myLibrary = [
+  {title: "titulo", author:"Yo", pages:123, isRead:true},
+  {title: "titulo", author:"Yo", pages:123, isRead:true},
+  {title: "titulo", author:"Yo", pages:123, isRead:true},
   {title: "titulo", author:"Yo", pages:123, isRead:true}
 ];
 
