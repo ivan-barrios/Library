@@ -84,6 +84,7 @@ function createBookCard(book){
     container.innerHTML = '';
     const index = myLibrary.indexOf(book);
     myLibrary.splice(index, 1);
+    updateDisplay();
   })
 
   container.classList.add('card-container');
