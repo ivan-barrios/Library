@@ -1,3 +1,4 @@
+//DATA
 let myLibrary = [
   {title: "titulo", author:"Yo", pages:123, isRead:true},
   {title: "titulazo", author:"El", pages:2, isRead:false},
@@ -12,9 +13,15 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead
 }
 
+
+
+
+//UI
 const booksDisplay = document.querySelector('.books-display');
+const addBookBtn = document.querySelector('.add-book-btn');
 
 
+//Adding new book to the library
 function getBookFromInput() {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -23,13 +30,24 @@ function getBookFromInput() {
   return new Book(title,author,pages,isRead);
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(e) {
+  e.preventDefault();
   const newBook = getBookFromInput();
   myLibrary.push(newBook);
+  updateDisplay();
   console.log(myLibrary);
 }
 
+function updateDisplay() {
+  resetDisplay();
+  displayBooks();
+}
 
+function resetDisplay(){
+  document.querySelector('.books-display').innerHTML = '';
+}
+
+//Display of the new book
 function createBookCard(book){
   const container = document.createElement('div');
   const title = document.createElement('p');
@@ -63,5 +81,5 @@ function displayBooks() {
     createBookCard(myLibrary[i]);
   }
 }
-console.log(myLibrary.length);
+
 displayBooks();
