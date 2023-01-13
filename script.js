@@ -1,9 +1,6 @@
 //DATA
 let myLibrary = [
-  {title: "titulo", author:"Yo", pages:123, isRead:true},
-  {title: "titulo", author:"Yo", pages:123, isRead:true},
-  {title: "titulo", author:"Yo", pages:123, isRead:true},
-  {title: "titulo", author:"Yo", pages:123, isRead:true}
+  {title: "The Almanack of Naval Ravikant", author:"Naval Ravikant", pages:'', isRead:true}
 ];
 
 function Book(title, author, pages, isRead) {
@@ -70,12 +67,12 @@ function createBookCard(book){
   isRead.addEventListener('click', () => {
     const index = myLibrary.indexOf(book);
     if (myLibrary[index].isRead){
-      isRead.textContent = 'Not Read';
       myLibrary[index].isRead = false;
+      updateDisplay();
     }
     else {
-      isRead.textContent = 'Read';
       myLibrary[index].isRead = true;
+      updateDisplay();
     }
   })
 
@@ -94,13 +91,15 @@ function createBookCard(book){
   title.textContent = `Title: ${book.title}`;
   author.textContent = `Author: ${book.author}`;
   pages.textContent = `Pages: ${book.pages}`;
-  remove.textContent = 'Remove Book';
+  remove.textContent = 'R';
   
   if (book.isRead) {
     isRead.textContent = 'Read';
+    isRead.style.backgroundColor = ('lightblue');
   }
   else{
     isRead.textContent = 'Not Read';
+    isRead.style.backgroundColor = ('pink');
   }
 
   container.appendChild(title);
